@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: api-django-deployment
+  labels:
+    app: api-django
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-django
+  template:
+    metadata:
+      labels: 
+        app: api-django
+    spec:
+      nodeSelector: 
+        ambiente: dev
+      containers:
+      - name: container-django
+        image: api-django
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+
+        startupProbe:
+          httpGet:
+            path: /api/startupz
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          failureThreshold: 30
+
+        livenessProbe:
+          httpGet: 
+            path: /api/livez
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
+        
+        readinessProbe:
+          httpGet: 
+            path: /api/readyz
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 3
