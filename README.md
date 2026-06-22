@@ -32,16 +32,17 @@ Antes de iniciar, certifique-se de possuir as seguintes dependências:
 
 ## Instalação
 
-### 1. Ative o recurso WSL2 no Windows
+#### 1. Ative o recurso WSL2 no Windows
 
-### 2. Inicie sua distribuição Linux
+#### 2. Inicie sua distribuição Linux
 
-### 3. Instale o Python3 pelo terminal do WSL
+#### 3. Instale o Python3 pelo terminal do WSL
 
-- sudo apt update
-- sudo apt install python3
+sudo apt update
 
-### 4. Instale o docker e suas dependências
+sudo apt install python3
+
+#### 4. Instale o docker e suas dependências
 
 sudo apt install -y certificates curl gnupg lsb-release
 
@@ -69,7 +70,7 @@ sudo systemctl enable docker
 
 sudo systemctl start docker
 
-### 5. Instale o minikube e suas dependências 
+#### 5. Instale o minikube e suas dependências 
 
 curl -LO https://googleapis.com
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
@@ -79,34 +80,34 @@ curl -LO "https://k8s.io(curl -L -s https://k8s.io)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 rm kubectl
 
-### 6. Selecione um diretório e clone o repositório
+#### 6. Selecione um diretório e clone o repositório
 
 git clone 
 
-### 7. Crie um ambiente virtual venv
+#### 7. Crie um ambiente virtual venv
 
 python3 -m venv .venv
 source .venv/bin/activate
 
-### 8. Instale as dependências do projeto
+#### 8. Instale as dependências do projeto
 
 pip install -r requirements.txt
 
-### 9. Inicie o cluster do minikube
+#### 9. Inicie o cluster do minikube
 
 minikube start
 
-### 10. Crie o deployment no cluster
+#### 10. Crie o deployment no cluster
 
 kubectl apply -f ./k8s/deployment.yaml
 (certifique-se de estar na pasta raiz do projeto)
 
-### 11. Crie o service no cluster
+#### 11. Crie o service no cluster
 
 kubectl apply -f ./k8s/deployment.yaml
 (certifique-se de estar na pasta raiz do projeto)
 
-### 12. Disponibilize o serviço
+#### 12. Disponibilize o serviço
 
 minikube service django-service
 
